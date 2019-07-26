@@ -60,36 +60,36 @@ def rolling_corr(list1_, list2_, time_list_, num):
     plt.show()
     return rolling_corr
 
-def load_data():
+def load_data(path):
     
-    df = pd.read_csv("/Users/feitenie/Downloads/TWEXMMTH.csv")
+    df = pd.read_csv(path + "TWEXMMTH.csv")
     df.set_index("DATE", inplace=True)
 
-    df_GDP = pd.read_csv("/Users/feitenie/Downloads/GDPC1.csv")     
+    df_GDP = pd.read_csv(path + "GDPC1.csv")     
     df_GDP.set_index("DATE", inplace=True)
 
-    df_UNEMPLOY = pd.read_csv("/Users/feitenie/Downloads/UNEMPLOY.csv")     
+    df_UNEMPLOY = pd.read_csv( path + "UNEMPLOY.csv")     
     df_UNEMPLOY.set_index("DATE", inplace=True)
 
-    df_MICH = pd.read_csv("/Users/feitenie/Downloads/MICH.csv")     
+    df_MICH = pd.read_csv( path + "MICH.csv")     
     df_MICH.set_index("DATE", inplace=True)
 
-    df_EXP = pd.read_csv("/Users/feitenie/Downloads/EXPGS.csv")     
+    df_EXP = pd.read_csv( path + "EXPGS.csv")     
     df_EXP.set_index("DATE", inplace=True)
 
-    df_IMP = pd.read_csv("/Users/feitenie/Downloads/IMPGS.csv")     
+    df_IMP = pd.read_csv( path + "IMPGS.csv")     
     df_IMP.set_index("DATE", inplace=True)
 
-    df_Y102 = pd.read_csv("/Users/feitenie/Downloads/T10Y2YM.csv")     
+    df_Y102 = pd.read_csv( path + "T10Y2YM.csv")     
     df_Y102.set_index("DATE", inplace=True)
 
-    df_OIL = pd.read_csv("/Users/feitenie/Downloads/MCOILWTICO.csv")     
+    df_OIL = pd.read_csv( path + "MCOILWTICO.csv")     
     df_OIL.set_index("DATE", inplace=True)
 
-    df_GS2 = pd.read_csv("/Users/feitenie/Downloads/GS2.csv")     
+    df_GS2 = pd.read_csv( path + "GS2.csv")     
     df_GS2.set_index("DATE", inplace=True)
 
-    df_CPI = pd.read_csv("/Users/feitenie/Downloads/CPALTT01USM659N.csv")     
+    df_CPI = pd.read_csv( path + "CPALTT01USM659N.csv")     
     df_CPI.set_index("DATE", inplace=True)
 
     df = pd.concat([df, df_GDP, df_UNEMPLOY, df_MICH, df_EXP, df_IMP, df_Y102, df_OIL, df_GS2, df_CPI], axis =1 ,join='outer', sort=True)
@@ -98,7 +98,7 @@ def load_data():
      
     return  df
 
-def real_interest_rate(real_rate , USD , time = time[:-2]):
+def real_interest_rate(real_rate , USD , time ):
     # plot for time series/ general picture
     f= plt.gcf()
     f.set_size_inches(8.69,5.27)
@@ -278,7 +278,8 @@ def EXP_over_IMP(EXP, IMP , USD_qua, time , Year = 40):
     
 
 if __name__ == "__main__":
-    df  = load_data()
+    path = "/Users/feitenie/Downloads/"
+    df  = load_data(path)
 
     #---- 0. general figure ----#
     USD = df["USD"][df["USD"].notnull()].values
